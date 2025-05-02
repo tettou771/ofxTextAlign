@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofConstants.h"
+using namespace std;
 
 namespace ofx { namespace textalign {
 

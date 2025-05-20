@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofConstants.h"
+#include <cstdint>
 using namespace std;
 
 namespace ofx { namespace textalign {
@@ -28,10 +29,10 @@ public:
 	void setMinHeight(float height) { min_height_=height; }
 protected:
 	virtual const char* drawChar(const char *str, float x, float y)=0;
-	virtual float getAdvance(char ch) const=0;
+	virtual float getAdvance(uint32_t codepoint) const=0;
 	virtual float getLineHeight() const=0;
 	virtual float getAscenderHeight() const { return 0; }
-	virtual float getKerning(char ch, char prev) const { return 0; };
+	virtual float getKerning(uint32_t codepoint, uint32_t prev) const { return 0; };
 protected:
 	float max_width_=0, min_width_=0;
 	float max_height_=0, min_height_=0;

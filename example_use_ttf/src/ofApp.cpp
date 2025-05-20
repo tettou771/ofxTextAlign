@@ -2,7 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	text_.load(OF_TTF_SANS, 30);
+    // load japanese font
+#ifdef TARGET_OS_MAC
+    string fontName = "Hiragino Kaku Gothic ProN";
+#elif defined WIN32
+    string fontName = "Meiryo";
+#endif
+    ofTrueTypeFontSettings settings(fontName, 30);
+    settings.antialiased = true;
+    settings.addRange(ofUnicode::Latin);
+    settings.addRanges(ofAlphabet::Japanese);
+    text_.load(settings);
 	
 	x_.setup("x", 0, 0, ofGetWidth());
 	y_.setup("y", 0, 0, ofGetHeight());
@@ -92,7 +102,8 @@ void ofApp::draw(){
 		case 1:	flags |= ofxTextAlign::VERTICAL_ALIGN_MIDDLE;	break;
 		case 2:	flags |= ofxTextAlign::VERTICAL_ALIGN_BOTTOM;	break;
 	}
-	text_.draw("The quick\nbrown fox\njumps over\nthe lazy dog", x_, y_, flags);
+	//text_.draw("The quick\nbrown fox\njumps over\nthe lazy dog", x_, y_, flags);
+    text_.draw("軽やかな茶色の狐が\nのんびり屋の犬を\nひょいと飛び越える\nそんなひとコマ", x_, y_, flags);
 	panel_.draw();
 }
 
